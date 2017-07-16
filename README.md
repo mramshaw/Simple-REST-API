@@ -15,17 +15,17 @@ All testing can be with __curl__ - although Postman should work too.
  
 In __Firefox__ at least, specifying "application/json" allows interpretation of the JSON:
 
-![JSON_in_Firefox](./json_in_firefox.png)
+![JSON in Firefox](./json_in_firefox.png)
 
 ## Installation
 
 - __Go__ is required (version 1.7 or later)
 
-This could also be done with __git__ of course:
+Fetch this project as follows:
 
 	$ go get -u github.com/mramshaw/Simple-REST-API
 
-Or:
+This could also be done with __git__ of course:
 
 	$ git clone https://github.com/mramshaw/Simple-REST-API.git
 
