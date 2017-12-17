@@ -1,0 +1,227 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "A proof of concept of a simple REST API in Golang",
+    "version": "1.0.0",
+    "title": "Simple REST API"
+  },
+  "host": "localhost:8100",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "people",
+      "description": "Access to People"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/people": {
+      "get": {
+        "tags": [
+          "people"
+        ],
+        "summary": "Returns all persons",
+        "description": "Returns all persons",
+        "operationId": "getPeople",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/people/{personId}": {
+      "post": {
+        "tags": [
+          "people"
+        ],
+        "summary": "Create a new person",
+        "description": "Create a new person",
+        "operationId": "createPerson",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to be created",
+            "required": true,
+            "type": "integer",
+            "minimum": 1
+          },
+          {
+            "in": "body",
+            "name": "Person to be created",
+            "description": "Person to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "400": {
+            "description": "Invalid Person"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "people"
+        ],
+        "summary": "Find person by ID",
+        "description": "Find person by ID",
+        "operationId": "getPersonById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to be fetched",
+            "required": true,
+            "type": "integer",
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Person not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "people"
+        ],
+        "summary": "Update a person",
+        "description": "Update a person",
+        "operationId": "updatePerson",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of person to be updated",
+            "required": true,
+            "type": "integer",
+            "minimum": 1
+          },
+          {
+            "in": "body",
+            "name": "Person to be updated",
+            "description": "Person to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "400": {
+            "description": "Invalid Person"
+          },
+          "404": {
+            "description": "Person not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "people"
+        ],
+        "summary": "Delete person by ID",
+        "description": "Delete person by ID",
+        "operationId": "deletePerson",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "ID of the person to be deleted",
+            "required": true,
+            "type": "integer",
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Person not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Person": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

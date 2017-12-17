@@ -53,7 +53,9 @@ Or run the executable (Ctrl-C to terminate):
 
 The API will then be accessible at:
 
-	http://localhost:8100/people
+	http://localhost:8100/v1/people
+
+[Note that the API is __versioned__ (which is probably a best practice).]
 
 ## Testing
 
@@ -61,30 +63,30 @@ Use the following __curl__ commands to test (Postman should work too).
 
 GET (All):
 
-	$ curl -v localhost:8100/people
+	$ curl -v localhost:8100/v1/people
 
 GET (Individual):
 
-	$ curl -v localhost:8100/people/5
+	$ curl -v localhost:8100/v1/people/5
 
-	$ curl -v localhost:8100/people/1
+	$ curl -v localhost:8100/v1/people/1
 
 POST (Create):
 
 	$ curl -v -X POST -H "Content-Type: application/json"   \
 	       -d '{"firstname":"Tommy","lastname":"Smothers"}' \
-	       localhost:8100/people/5
+	       localhost:8100/v1/people/5
 
 PUT (Update):
 
 	$ curl -v -X PUT -H "Content-Type: application/json" \
 	       -d '{"firstname":"Tom","lastname":"Smothers","address":{"city":"Hollywood","state":"CA"}}' \
-	       localhost:8100/people/5
+	       localhost:8100/v1/people/5
 
 DELETE (Delete):
 
 	$ curl -v -X DELETE -H "Content-Type: application/json" \
-	       localhost:8100/people/5
+	       localhost:8100/v1/people/5
 
 [Specifying __-v__ shows the HTTP status codes; this can be omitted if the status codes are not of interest.]
 

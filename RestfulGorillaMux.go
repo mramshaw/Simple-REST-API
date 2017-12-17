@@ -8,6 +8,8 @@ import (
     "github.com/gorilla/mux"
 )
 
+var apiVersion = "v1"
+
 type Person struct {
     ID        string   `json:"id,       omitempty"`
     Firstname string   `json:"firstname,omitempty"`
@@ -94,11 +96,11 @@ func init() {
 
 func main() {
     router := mux.NewRouter()
-    router.HandleFunc("/people", getPeopleEndpoint).Methods("GET")
-    router.HandleFunc("/people/{id}", getPersonEndpoint).Methods("GET")
-    router.HandleFunc("/people/{id}", createPersonEndpoint).Methods("POST")
-    router.HandleFunc("/people/{id}", modifyPersonEndpoint).Methods("PUT")
-    router.HandleFunc("/people/{id}", deletePersonEndpoint).Methods("DELETE")
+    router.HandleFunc("/" + apiVersion + "/people", getPeopleEndpoint).Methods("GET")
+    router.HandleFunc("/" + apiVersion + "/people/{id}", getPersonEndpoint).Methods("GET")
+    router.HandleFunc("/" + apiVersion + "/people/{id}", createPersonEndpoint).Methods("POST")
+    router.HandleFunc("/" + apiVersion + "/people/{id}", modifyPersonEndpoint).Methods("PUT")
+    router.HandleFunc("/" + apiVersion + "/people/{id}", deletePersonEndpoint).Methods("DELETE")
     log.Print("Now listening on http://localhost:8100 ...")
     log.Fatal(http.ListenAndServe(":8100", router))
 }
