@@ -4,7 +4,7 @@ A proof of concept of a simple REST API in Golang.
 
 All data is held in memory, all transfer is via JSON.
 
-All testing can be with __curl__ - although Postman should work too.
+All testing can be with __curl__ or __Swagger__ - although Postman should work too.
 
 ## Features
 
@@ -59,7 +59,7 @@ The API will then be accessible at:
 
 ## Testing
 
-Use the following __curl__ commands to test (Postman should work too).
+Use the following __curl__ commands to test (or use the Swagger UI as shown below).
 
 GET (All):
 
@@ -98,13 +98,13 @@ The content can be served from __swagger-ui__ (which uses __node__ and __npm__).
 
 ![Swagger on chromium](./swagger.png)
 
-On linux, CORS may be temporarily disabled for __chromium__ as follows:
+On linux, CORS (Cross Origin Resource Sharing) may be temporarily disabled for __chromium__ as follows:
 
     $ chromium-browser --disable-web-security --user-data-dir
 
 ## Credits
 
-Largely based (with some changes) upon this great tutorial by Nic Raboy:
+Based (with many changes) upon this great tutorial by Nic Raboy:
 
 	https://www.thepolyglotdeveloper.com/2016/07/create-a-simple-restful-api-with-golang/
 

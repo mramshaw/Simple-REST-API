@@ -28,20 +28,20 @@ func getPersonEndpoint(w http.ResponseWriter, req *http.Request) {
     params := mux.Vars(req)
     for _, item := range people {
         if item.ID == params["id"] {
-            w.Header().Add("Content-Type", "application/json")
+            w.Header().Set("Content-Type", "application/json")
             w.WriteHeader(http.StatusOK)
             json.NewEncoder(w).Encode(item)
             return
         }
     }
     // If no match found, return 'empty' Person
-    w.Header().Add("Content-Type", "application/json")
+    w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusNotFound)
     json.NewEncoder(w).Encode(&Person{})
 }
 
 func getPeopleEndpoint(w http.ResponseWriter, req *http.Request) {
-    w.Header().Add("Content-Type", "application/json")
+    w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusOK)
     json.NewEncoder(w).Encode(people)
 }
@@ -52,7 +52,7 @@ func createPersonEndpoint(w http.ResponseWriter, req *http.Request) {
     _ = json.NewDecoder(req.Body).Decode(&person)
     person.ID = params["id"]
     people = append(people, person)
-    w.Header().Add("Content-Type", "application/json")
+    w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusCreated)
     json.NewEncoder(w).Encode(people)
 }
@@ -69,7 +69,7 @@ func modifyPersonEndpoint(w http.ResponseWriter, req *http.Request) {
             break
         }
     }
-    w.Header().Add("Content-Type", "application/json")
+    w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusOK)
     json.NewEncoder(w).Encode(people)
 }
@@ -82,7 +82,7 @@ func deletePersonEndpoint(w http.ResponseWriter, req *http.Request) {
             break
         }
     }
-    w.Header().Add("Content-Type", "application/json")
+    w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusOK)
     json.NewEncoder(w).Encode(people)
 }
@@ -102,5 +102,26 @@ func main() {
     router.HandleFunc("/" + apiVersion + "/people/{id}", modifyPersonEndpoint).Methods("PUT")
     router.HandleFunc("/" + apiVersion + "/people/{id}", deletePersonEndpoint).Methods("DELETE")
     log.Print("Now listening on http://localhost:8100 ...")
-    log.Fatal(http.ListenAndServe(":8100", router))
+    log.Fatal(http.ListenAndServe(":8100", handleCORS(router)))
+}
+
+func handleCORS(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+        origin := req.Header.Get("Origin")
+        if origin != "" {
+            // define the hosts we will service
+            if origin == "http://localhost:3200" {
+                w.Header().Set("Access-Control-Allow-Origin", origin)
+            } else {
+                return
+            }
+        }
+        if req.Method == "OPTIONS" {
+            w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+            w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type")
+            w.Header().Set("Content-Type", "application/json")
+            return
+        }
+        next.ServeHTTP(w, req)
+    })
 }
