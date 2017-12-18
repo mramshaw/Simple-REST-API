@@ -90,6 +90,18 @@ DELETE (Delete):
 
 [Specifying __-v__ shows the HTTP status codes; this can be omitted if the status codes are not of interest.]
 
+## Swagger
+
+Although Postman is pretty nice, I've always found Swagger to be a better experience.
+
+The content can be served from __swagger-ui__ (which uses __node__ and __npm__).
+
+![Swagger on chromium](./swagger.png)
+
+On linux, CORS may be temporarily disabled for __chromium__ as follows:
+
+    $ chromium-browser --disable-web-security --user-data-dir
+
 ## Credits
 
 Largely based (with some changes) upon this great tutorial by Nic Raboy:
