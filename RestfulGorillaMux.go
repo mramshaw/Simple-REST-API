@@ -22,28 +22,22 @@ type Address struct {
     State string `json:"state,omitempty"`
 }
 
-var people []Person
-
 func getPersonEndpoint(w http.ResponseWriter, req *http.Request) {
     params := mux.Vars(req)
-    for _, item := range people {
-        if item.ID == params["id"] {
-            w.Header().Set("Content-Type", "application/json")
-            w.WriteHeader(http.StatusOK)
-            json.NewEncoder(w).Encode(item)
-            return
-        }
+    person := getPerson(params["id"])
+    // the best way to check for an empty Person
+    if person.ID == "" {
+        w.WriteHeader(http.StatusNotFound)
+        json.NewEncoder(w).Encode(person)
+        return
     }
-    // If no match found, return 'empty' Person
-    w.Header().Set("Content-Type", "application/json")
-    w.WriteHeader(http.StatusNotFound)
-    json.NewEncoder(w).Encode(&Person{})
+    w.WriteHeader(http.StatusOK)
+    json.NewEncoder(w).Encode(person)
 }
 
 func getPeopleEndpoint(w http.ResponseWriter, req *http.Request) {
-    w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusOK)
-    json.NewEncoder(w).Encode(people)
+    json.NewEncoder(w).Encode(getPeople())
 }
 
 func createPersonEndpoint(w http.ResponseWriter, req *http.Request) {
@@ -51,10 +45,8 @@ func createPersonEndpoint(w http.ResponseWriter, req *http.Request) {
     var person Person
     _ = json.NewDecoder(req.Body).Decode(&person)
     person.ID = params["id"]
-    people = append(people, person)
-    w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusCreated)
-    json.NewEncoder(w).Encode(people)
+    json.NewEncoder(w).Encode(createPerson(person))
 }
 
 func modifyPersonEndpoint(w http.ResponseWriter, req *http.Request) {
@@ -62,36 +54,33 @@ func modifyPersonEndpoint(w http.ResponseWriter, req *http.Request) {
     var person Person
     _ = json.NewDecoder(req.Body).Decode(&person)
     person.ID = params["id"]
-    for index, item := range people {
-        if item.ID == params["id"] {
-            people = append(people[:index], people[index+1:]...)
-            people = append(people, person)
-            break
-        }
+    matched, people := modifyPerson(person)
+    if !matched {
+        w.WriteHeader(http.StatusNotFound)
+        json.NewEncoder(w).Encode(people)
+        return
     }
-    w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusOK)
     json.NewEncoder(w).Encode(people)
 }
 
 func deletePersonEndpoint(w http.ResponseWriter, req *http.Request) {
     params := mux.Vars(req)
-    for index, item := range people {
-        if item.ID == params["id"] {
-            people = append(people[:index], people[index+1:]...)
-            break
-        }
+    matched, people := deletePerson(params["id"])
+    if !matched {
+        w.WriteHeader(http.StatusNotFound)
+        json.NewEncoder(w).Encode(people)
+        return
     }
-    w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusOK)
     json.NewEncoder(w).Encode(people)
 }
 
 func init() {
-    people = append(people, Person{ID: "1", Firstname: "Fred", Lastname: "Flintstone", Address: &Address{City: "Bedrock", State: "AK"}})
-    people = append(people, Person{ID: "2", Firstname: "Wilma", Lastname: "Flintstone"})
-    people = append(people, Person{ID: "3", Firstname: "Barney", Lastname: "Rubble", Address: &Address{City: "Bedrock"}})
-    people = append(people, Person{ID: "4", Firstname: "Betty", Lastname: "Rubble"})
+    createPerson(Person{ID: "1", Firstname: "Fred", Lastname: "Flintstone", Address: &Address{City: "Bedrock", State: "AK"}})
+    createPerson(Person{ID: "2", Firstname: "Wilma", Lastname: "Flintstone"})
+    createPerson(Person{ID: "3", Firstname: "Barney", Lastname: "Rubble", Address: &Address{City: "Bedrock"}})
+    createPerson(Person{ID: "4", Firstname: "Betty", Lastname: "Rubble"})
 }
 
 func main() {
@@ -107,6 +96,7 @@ func main() {
 
 func handleCORS(next http.Handler) http.Handler {
     return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+        w.Header().Set("Content-Type", "application/json")
         origin := req.Header.Get("Origin")
         if origin != "" {
             // define the hosts we will service
@@ -119,7 +109,6 @@ func handleCORS(next http.Handler) http.Handler {
         if req.Method == "OPTIONS" {
             w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
             w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type")
-            w.Header().Set("Content-Type", "application/json")
             return
         }
         next.ServeHTTP(w, req)
