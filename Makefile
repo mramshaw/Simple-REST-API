@@ -4,7 +4,7 @@ GOPATH  := "`pwd`/go"
 GOOS    := linux
 GOARCH  := amd64
 
-all:	deps build
+all:	deps test build
 
 env:
 	echo $(GOPATH)
@@ -12,6 +12,9 @@ env:
 deps:
 	mkdir -p $(GOPATH)
 	GOPATH=$(GOPATH) go get -d -v .
+
+test:
+	GOPATH=$(GOPATH) GOOS=$(GOOS) GOARCH=$(GOARCH) go test -v
 
 build:
 	GOPATH=$(GOPATH) GOOS=$(GOOS) GOARCH=$(GOARCH) go build -v -o RestfulGorillaMux .

@@ -41,6 +41,16 @@ This will fetch all dependencies and build the executable:
 
 All dependencies will be stored in a local __go__ directory.
 
+## Unit Tests
+
+- __make__ is required
+
+This will run the unit tests for the DAO:
+
+	$ make test
+
+The unit tests will be run in __verbose__ mode.
+
 ## Usage
 
 Simply run the go code (Ctrl-C to terminate):
@@ -102,9 +112,22 @@ On linux, CORS (Cross Origin Resource Sharing) may be temporarily disabled for _
 
     $ chromium-browser --disable-web-security --user-data-dir
 
+## To Do
+
+- [x] Return appropriate HTTP status codes
+- [x] Implement code to modify a Person
+- [x] Modify to use __JSON__
+- [x] Implement API versioning
+- [x] Add a SWAGGER definition
+- [x] Implement CORS (Cross Origin Resource Sharing) handling
+- [x] Refactor data access into a DAO module
+- [x] Add tests for the DAO
+- [ ] Implement a persistent back-end
+- [ ] Investigate upgrading to HTTP2
+
 ## Credits
 
-Based (with many changes) upon this great tutorial by Nic Raboy:
+Based (with many changes and additions) upon this great tutorial by Nic Raboy:
 
 	https://www.thepolyglotdeveloper.com/2016/07/create-a-simple-restful-api-with-golang/
 
