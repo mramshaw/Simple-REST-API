@@ -2,6 +2,7 @@ package main
 
 import (
     "encoding/json"
+    "fmt"
     "log"
     "net/http"
 
@@ -10,6 +11,7 @@ import (
 
 var apiVersion = "v1"
 
+// The Person entity is used to marshall/unnmarshall JSON.
 type Person struct {
     ID        string   `json:"id,       omitempty"`
     Firstname string   `json:"firstname,omitempty"`
@@ -17,6 +19,7 @@ type Person struct {
     Address   *Address `json:"address,  omitempty"`
 }
 
+// The Address entity is used to marshall/unnmarshall JSON.
 type Address struct {
     City  string `json:"city, omitempty"`
     State string `json:"state,omitempty"`
@@ -85,13 +88,25 @@ func init() {
 
 func main() {
     router := mux.NewRouter()
+
+    // Health Check
+    router.HandleFunc("/ping", healthCheck).Methods("GET")
+
+    // API
     router.HandleFunc("/" + apiVersion + "/people", getPeopleEndpoint).Methods("GET")
     router.HandleFunc("/" + apiVersion + "/people/{id}", getPersonEndpoint).Methods("GET")
     router.HandleFunc("/" + apiVersion + "/people/{id}", createPersonEndpoint).Methods("POST")
     router.HandleFunc("/" + apiVersion + "/people/{id}", modifyPersonEndpoint).Methods("PUT")
     router.HandleFunc("/" + apiVersion + "/people/{id}", deletePersonEndpoint).Methods("DELETE")
+
     log.Print("Now listening on http://localhost:8100 ...")
     log.Fatal(http.ListenAndServe(":8100", handleCORS(router)))
+}
+
+func healthCheck(w http.ResponseWriter, req *http.Request) {
+    w.Header().Set("Content-Type", "text/plain")
+    w.WriteHeader(http.StatusOK)
+    fmt.Fprint(w, "pong\n")
 }
 
 func handleCORS(next http.Handler) http.Handler {
