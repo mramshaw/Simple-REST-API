@@ -39,13 +39,15 @@ This will fetch all dependencies and build the executable:
 
 	$ make
 
-All dependencies will be stored in a local __go__ directory.
+Local dependencies are stored in a local __api__ directory.
+
+All other dependencies will be stored in a local __go__ directory.
 
 ## Unit Tests
 
 - __make__ is required
 
-This will run the unit tests for the DAO:
+This will run the unit tests for the DAO (api/people package):
 
 	$ make test
 
@@ -112,6 +114,8 @@ On linux, CORS (Cross Origin Resource Sharing) may be temporarily disabled for _
 
     $ chromium-browser --disable-web-security --user-data-dir
 
+[This will only work if chromium is NOT running, as it will otherwise share the browser session.]
+
 ## To Do
 
 - [x] Return appropriate HTTP status codes
@@ -122,12 +126,17 @@ On linux, CORS (Cross Origin Resource Sharing) may be temporarily disabled for _
 - [x] Implement CORS (Cross Origin Resource Sharing) handling
 - [x] Refactor data access into a DAO module
 - [x] Add tests for the DAO
+- [x] Add a health check
+- [x] Refactored code
+- [ ] Refactor code to NOT use GorillaMux
+- [ ] Move configuration to __.env__ file
+- [ ] Make CORS hosts configurable
 - [ ] Implement a persistent back-end
 - [ ] Investigate upgrading to HTTP2
 
 ## Credits
 
-Based (with many changes and additions) upon this great tutorial by Nic Raboy:
+Inspired by, but since heavily mutated, this great tutorial by Nic Raboy:
 
 	https://www.thepolyglotdeveloper.com/2016/07/create-a-simple-restful-api-with-golang/
 

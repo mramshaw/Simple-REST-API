@@ -1,8 +1,8 @@
-package main
+package people
 
 var people []Person
 
-func getPerson(id string) Person {
+func GetPerson(id string) Person {
     for _, person := range people {
         if person.ID == id {
             return person
@@ -12,16 +12,16 @@ func getPerson(id string) Person {
     return Person{}
 }
 
-func getPeople() []Person {
+func GetPeople() []Person {
     return people
 }
 
-func createPerson(person Person) []Person {
+func CreatePerson(person Person) []Person {
     people = append(people, person)
     return people
 }
 
-func modifyPerson(p Person) (bool, []Person) {
+func ModifyPerson(p Person) (bool, []Person) {
     id := p.ID
     for index, person := range people {
         if person.ID == id {
@@ -33,7 +33,7 @@ func modifyPerson(p Person) (bool, []Person) {
     return false, people
 }
 
-func deletePerson(id string) (bool, []Person) {
+func DeletePerson(id string) (bool, []Person) {
     for index, person := range people {
         if person.ID == id {
             people = append(people[:index], people[index+1:]...)

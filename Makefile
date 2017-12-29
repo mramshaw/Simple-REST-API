@@ -1,5 +1,5 @@
 IMG     := mramshaw4docs/restfulapi
-VERSION := 1.0.0
+VERSION := 1.0.1
 GOPATH  := "`pwd`/go"
 GOOS    := linux
 GOARCH  := amd64
@@ -14,7 +14,7 @@ deps:
 	GOPATH=$(GOPATH) go get -d -v .
 
 test:
-	GOPATH=$(GOPATH) GOOS=$(GOOS) GOARCH=$(GOARCH) go test -v
+	GOPATH=$(GOPATH) GOOS=$(GOOS) GOARCH=$(GOARCH) go test -v ./api/people
 
 build:
 	GOPATH=$(GOPATH) GOOS=$(GOOS) GOARCH=$(GOARCH) go build -v -o RestfulGorillaMux .
