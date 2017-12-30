@@ -4,9 +4,10 @@ import (
     "net/http"
 )
 
+// HandleCORS is a function to handle CORS (Cross Origin Resource Sharing).
 func HandleCORS(next http.Handler) http.Handler {
     return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-        w.Header().Set("Content-Type", "application/json")
+        w.Header().Set("Content-Type", "application/json; charset=utf-8")
         origin := req.Header.Get("Origin")
         if origin != "" {
             // define the hosts we will service
