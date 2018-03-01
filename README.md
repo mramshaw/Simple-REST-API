@@ -129,8 +129,9 @@ On linux, CORS (Cross Origin Resource Sharing) may be temporarily disabled for _
 - [x] Add a health check
 - [x] Refactored code
 - [ ] Refactor code to NOT use GorillaMux
-- [ ] Move configuration to __.env__ file
-- [ ] Make CORS hosts configurable
+- [x] Move configuration to environment variables (12-Factor everything)
+- [x] Make CORS hosts configurable
+- [ ] Implement method-based Basic AUTH
 - [ ] Implement a persistent back-end
 - [ ] Investigate upgrading to HTTP2
 

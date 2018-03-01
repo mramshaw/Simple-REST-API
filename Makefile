@@ -1,10 +1,15 @@
-IMG     := mramshaw4docs/restfulapi
-VERSION := 1.0.1
-GOPATH  := "`pwd`/go"
-GOOS    := linux
-GOARCH  := amd64
+IMG       := mramshaw4docs/restfulapi
+VERSION   := 1.0.2
+GOPATH    := "`pwd`/go"
+GOOS      := linux
+GOARCH    := amd64
 
-all:	deps test build
+PORT      := 8100
+
+# swagger-ui
+CORS_HOST := http://localhost:3200
+
+all:	deps test build run
 
 env:
 	echo $(GOPATH)
@@ -18,6 +23,9 @@ test:
 
 build:
 	GOPATH=$(GOPATH) GOOS=$(GOOS) GOARCH=$(GOARCH) go build -v -o RestfulGorillaMux .
+
+run:
+	GOPATH=$(GOPATH) GOOS=$(GOOS) GOARCH=$(GOARCH) PORT=$(PORT) CORS_HOST=$(CORS_HOST) ./RestfulGorillaMux
 
 package:
 	docker build -t $(IMG) .
