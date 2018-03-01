@@ -8,7 +8,7 @@ All testing can be with __curl__ or __Swagger__ - although Postman should work t
 
 ## Features
 
-- uses Gorilla MUX (github.com/gorilla/mux)
+- uses the excellent [Gorilla MUX](https://github.com/Gorilla/mux)
 - returns appropriate HTTP status codes
 - modify Person method implemented
 - uses __JSON__
@@ -35,7 +35,7 @@ Any dependencies will be fetched in the __build__ process.
 
 - __make__ is required
 
-This will fetch all dependencies and build the executable:
+This will fetch all dependencies, build, and run the executable:
 
 	$ make
 
@@ -55,13 +55,19 @@ The unit tests will be run in __verbose__ mode.
 
 ## Usage
 
-Simply run the go code (Ctrl-C to terminate):
+Build and run everything:
 
-	$ go run RestfulGorillaMux.go
+	$ make
+
+Or run the go code (Ctrl-C to terminate):
+
+	$ PORT=8100 CORS_HOST=http://localhost:3200 go run RestfulGorillaMux.go
+
+[Specifying `CORS_HOST` allows the swagger-ui to function.]
 
 Or run the executable (Ctrl-C to terminate):
 
-	$ ./RestfulGorillaMux
+	$ PORT=8100 CORS_HOST=http://localhost:3200 ./RestfulGorillaMux
 
 The API will then be accessible at:
 
@@ -128,9 +134,10 @@ On linux, CORS (Cross Origin Resource Sharing) may be temporarily disabled for _
 - [x] Add tests for the DAO
 - [x] Add a health check
 - [x] Refactored code
-- [ ] Refactor code to NOT use GorillaMux
+- [ ] Refactor code to NOT use Gorilla/mux
 - [x] Move configuration to environment variables (12-Factor everything)
 - [x] Make CORS hosts configurable
+- [ ] Implement graceful shutdown (available since __Go 1.8__)
 - [ ] Implement method-based Basic AUTH
 - [ ] Implement a persistent back-end
 - [ ] Investigate upgrading to HTTP2
