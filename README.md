@@ -4,7 +4,7 @@ A proof of concept of a simple REST API in Golang.
 
 All data is held in memory, all transfer is via JSON.
 
-All testing can be with __curl__ or __Swagger__ - although Postman should work too.
+All testing can be with __curl__ or [Swagger](https://swagger.io/) - although Postman should work too.
 
 ## Features
 
@@ -112,7 +112,7 @@ DELETE (Delete):
 
 Although Postman is pretty nice, I've always found Swagger to be a better experience.
 
-The content can be served from __swagger-ui__ (which uses __node__ and __npm__).
+The content can be served from [swagger-ui](https://github.com/swagger-api/swagger-ui) (which uses __node__ and __npm__).
 
 ![Swagger on chromium](./swagger.png)
 
