@@ -18,10 +18,10 @@ deps:
 	mkdir -p $(GOPATH)
 	GOPATH=$(GOPATH) go get -d -v .
 
-test:
+test:	deps
 	GOPATH=$(GOPATH) GOOS=$(GOOS) GOARCH=$(GOARCH) go test -v ./api/people
 
-build:
+build:	test
 	GOPATH=$(GOPATH) GOOS=$(GOOS) GOARCH=$(GOARCH) go build -v -o RestfulGorillaMux .
 
 run:
