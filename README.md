@@ -1,14 +1,15 @@
 # Simple REST API
 
+[![Build status](https://travis-ci.org/mramshaw/Simple-REST-API.svg?branch=master)](https://travis-ci.org/mramshaw/Simple-REST-API)
+[![Coverage Status](http://codecov.io/github/mramshaw/Simple-REST-API/coverage.svg?branch=master)](http://codecov.io/github/mramshaw/Simple-REST-API?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mramshaw/Simple-REST-API?style=flat-square)](https://goreportcard.com/report/github.com/mramshaw/Simple-REST-API)
+[![GitHub release](https://img.shields.io/github/release/mramshaw/Simple-REST-API.svg?style=flat-square)](https://github.com/mramshaw/Simple-REST-API/releases)
+
 A proof of concept of a simple REST API in Golang.
 
 All data is held in memory, all transfer is via JSON.
 
 All testing can be with __curl__ or [Swagger](https://swagger.io/) - although Postman should work too.
-
-[![Build status](https://travis-ci.org/mramshaw/Simple-REST-API.svg?branch=master)](https://travis-ci.org/mramshaw/Simple-REST-API)
-[![Coverage Status](http://codecov.io/github/mramshaw/Simple-REST-API/coverage.svg?branch=master)](http://codecov.io/github/mramshaw/Simple-REST-API?branch=master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/mramshaw/Simple-REST-API?style=flat-square)](https://goreportcard.com/report/github.com/mramshaw/Simple-REST-API)
 
 ## Features
 
@@ -145,6 +146,7 @@ On linux, CORS (Cross Origin Resource Sharing) may be temporarily disabled for _
 - [x] Implement continuous integration (Travis CI)
 - [x] Implement code coverage statistics (Codecov.io)
 - [x] Implement Go report card (Goreportcard.com)
+- [x] Implement [SemVer 2.0.0.](https://semver.org/spec/v2.0.0.html) release tagging
 - [ ] Add Prometheus-style instrumentation
 - [ ] Implement method-based Basic AUTH
 - [ ] Implement a persistent back-end
