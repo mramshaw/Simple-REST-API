@@ -138,6 +138,8 @@ On linux, CORS (Cross Origin Resource Sharing) may be temporarily disabled for _
 - [x] Move configuration to environment variables (12-Factor everything)
 - [x] Make CORS hosts configurable
 - [ ] Implement graceful shutdown (available since __Go 1.8__)
+- [x] Implement continuous integration (Travis CI)
+- [ ] Add Prometheus-style instrumentation
 - [ ] Implement method-based Basic AUTH
 - [ ] Implement a persistent back-end
 - [ ] Investigate upgrading to HTTP2
