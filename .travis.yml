@@ -8,7 +8,7 @@ go:
 
 script:
   - make build
-  - ./go_test.sh
+  - go test -race -coverprofile=coverage.txt -covermode=atomic ./api/people
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
