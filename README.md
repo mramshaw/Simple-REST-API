@@ -1,10 +1,10 @@
 # Simple REST API
 
-[![Build status](https://travis-ci.org/mramshaw/Simple-REST-API.svg?branch=master)](https://travis-ci.org/mramshaw/Simple-REST-API)
+[![Build status](http://travis-ci.org/mramshaw/Simple-REST-API.svg?branch=master)](http://travis-ci.org/mramshaw/Simple-REST-API)
 [![Coverage Status](http://codecov.io/github/mramshaw/Simple-REST-API/coverage.svg?branch=master)](http://codecov.io/github/mramshaw/Simple-REST-API?branch=master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/mramshaw/Simple-REST-API?style=flat-square)](https://goreportcard.com/report/github.com/mramshaw/Simple-REST-API)
-[![GoDoc](https://godoc.org/github.com/mramshaw/Simple-REST-API?status.svg)](https://godoc.org/github.com/mramshaw/Simple-REST-API)
-[![GitHub release](https://img.shields.io/github/release/mramshaw/Simple-REST-API.svg?style=flat-square)](https://github.com/mramshaw/Simple-REST-API/releases)
+[![Go Report Card](http://goreportcard.com/badge/github.com/mramshaw/Simple-REST-API?style=flat-square)](http://goreportcard.com/report/github.com/mramshaw/Simple-REST-API)
+[![GoDoc](http://godoc.org/github.com/mramshaw/Simple-REST-API?status.svg)](http://godoc.org/github.com/mramshaw/Simple-REST-API)
+[![GitHub release](http://img.shields.io/github/release/mramshaw/Simple-REST-API.svg?style=flat-square)](http://github.com/mramshaw/Simple-REST-API/releases)
 
 A proof of concept of a simple REST API in Golang.
 
