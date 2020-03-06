@@ -4,7 +4,7 @@
 [![Coverage Status](http://codecov.io/github/mramshaw/Simple-REST-API/coverage.svg?branch=master)](http://codecov.io/github/mramshaw/Simple-REST-API?branch=master)
 [![Go Report Card](http://goreportcard.com/badge/github.com/mramshaw/Simple-REST-API?style=flat-square)](http://goreportcard.com/report/github.com/mramshaw/Simple-REST-API)
 [![GoDoc](http://godoc.org/github.com/mramshaw/Simple-REST-API?status.svg)](http://godoc.org/github.com/mramshaw/Simple-REST-API)
-[![GitHub release](http://img.shields.io/github/release/mramshaw/Simple-REST-API.svg?style=flat-square)](http://github.com/mramshaw/Simple-REST-API/releases)
+[![GitHub release](http://img.shields.io/github/v/release/mramshaw/Simple-REST-API?style=flat-square)](http://github.com/mramshaw/Simple-REST-API/releases)
 
 A proof of concept of a simple REST API in Golang.
 
@@ -153,6 +153,8 @@ On linux, CORS (Cross Origin Resource Sharing) may be temporarily disabled for _
 - [ ] Implement method-based Basic AUTH
 - [ ] Implement a persistent back-end
 - [ ] Investigate upgrading to HTTP2
+- [x] Upgrade to latest release of Golang (1.14 as of the time of writing)
+- [x] Upgrade `release` badge to conform to new Shields.io standards
 
 ## Credits
 
